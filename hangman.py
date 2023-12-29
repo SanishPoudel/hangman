@@ -58,6 +58,19 @@ def hangman():
         print("You died. The word was", word + ".")
     else:
         print("Congratulations! You guessed the word", word + ".")
+        global score
+        score += 1 
+        print("Your score is:", score)
 
 # executing the program
-hangman()
+if __name__ == "__main__":
+    score = 0
+    while True:
+        hangman()
+        response = input("Do you wish to play? (y/n) ").lower()
+        while response != "y" and response != "n":
+            response = input("Invalid input. Do you wish to play? (y/n) ").lower()
+        if response == "n":
+            print("Your final score is:", score)
+            print("Game over")
+            break
