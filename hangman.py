@@ -33,7 +33,31 @@ def hangman():
             else:
                 word_list.append("_")
 
-        print(lives_visual_dict[lives]) # printing the hangman figure corresponding to the current lives
+        print(lives_visual_dict[lives]) # printing the hangman figure corresponding to the current life
         print("Current word:"," ".join(word_list)) # shows the current word with the _ for incomplete letters
 
+    # letters and arrangements
+        user_letter = input("Guess a letter: ").upper()
+        if user_letter in alphabet - used_letters:
+            used_letters.add(user_letter)
+            if user_letter in word_letters:
+                word_letters.remove(user_letter)
+            else:
+                lives = lives - 1
+                print(f"{user_letter} is not in the word. You now have {lives} lives left.") if lives != 1 else print(f"{user_letter} is not in the word. You now have {lives} life left.") # The if statement is to maintain correct grammar.
+
+        elif user_letter in used_letters:
+            print("You have already used that letter. Please try again.") 
+
+        else:
+            print("Invalid input. Please try again.") # Incase the user types something other than letters.
+
+    # gets here if the user either wins or loses
+    if lives == 0:
+        print(lives_visual_dict[lives])
+        print("You died. The word was", word + ".")
+    else:
+        print("Congratulations! You guessed the word", word + ".")
+
+# executing the program
 hangman()
